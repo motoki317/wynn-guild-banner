@@ -374,8 +374,7 @@ func init() {
 	patterns["TRIANGLE_BOTTOM"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 10; i++ {
 			b.setColor(col)
-			b.fillRect(10*i, 390-20*i,
-				20*(10-i), 10+20*i)
+			b.fillRect(10*i, 390-20*i, 20*(10-i), 10+20*i)
 			b.setColor(getMaskColor(col))
 			if i < 9 {
 				b.fillRect(10*i, 370-20*i, 10, 20)
@@ -392,8 +391,7 @@ func init() {
 	patterns["TRIANGLE_TOP"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 10; i++ {
 			b.setColor(col)
-			b.fillRect(10*i, 0,
-				20*(10-i), 10+20*i)
+			b.fillRect(10*i, 0, 20*(10-i), 10+20*i)
 			b.setColor(getMaskColor(col))
 			if i < 9 {
 				b.fillRect(10*i, 10+20*i, 10, 20)
@@ -453,7 +451,7 @@ func init() {
 		}
 		b.setColor(getMaskColor(col))
 		for i := 0; i < 20; i++ {
-			b.fillRect(0+i*10, 0+380-i*20, 10, 20)
+			b.fillRect(i*10, 380-i*20, 10, 20)
 		}
 		b.setColor(Mask)
 		b.fillRect(10, 0, 180, 10)
@@ -462,11 +460,11 @@ func init() {
 
 	patterns["DIAGONAL_RIGHT"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 19; i++ {
-			b.fillRect(0+190-i*10, 0+(i+1)*20, 10, 380-i*20)
+			b.fillRect(190-i*10, (i+1)*20, 10, 380-i*20)
 		}
 		b.setColor(getMaskColor(col))
 		for i := 0; i < 20; i++ {
-			b.fillRect(0+190-i*10, 0+i*20, 10, 20)
+			b.fillRect(190-i*10, i*20, 10, 20)
 		}
 		b.setColor(Mask)
 		b.fillRect(10, 390, 180, 10)
@@ -476,11 +474,11 @@ func init() {
 	// invert 0
 	patterns["DIAGONAL_LEFT_MIRROR"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 19; i++ {
-			b.fillRect(0+i*10, 0+(i+1)*20, 10, 380-i*20)
+			b.fillRect(i*10, (i+1)*20, 10, 380-i*20)
 		}
 		b.setColor(getMaskColor(col))
 		for i := 0; i < 20; i++ {
-			b.fillRect(0+i*10, 0+i*20, 10, 20)
+			b.fillRect(i*10, i*20, 10, 20)
 		}
 		b.setColor(Mask)
 		b.fillRect(10, 390, 180, 10)
@@ -489,11 +487,11 @@ func init() {
 
 	patterns["DIAGONAL_RIGHT_MIRROR"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 19; i++ {
-			b.fillRect(0+190-i*10, 0, 10+i*10, 380-i*20)
+			b.fillRect(190-i*10, 0, 10+i*10, 380-i*20)
 		}
 		b.setColor(getMaskColor(col))
 		for i := 0; i < 20; i++ {
-			b.fillRect(0+190-i*10, 0+380-i*20, 10, 20)
+			b.fillRect(190-i*10, 380-i*20, 10, 20)
 		}
 		b.setColor(Mask)
 		b.fillRect(10, 0, 180, 10)
@@ -594,8 +592,7 @@ func init() {
 				b.setColor(col)
 				b.fillRect(60*j-offset, i*40, 40, 20)
 				b.setColor(getMaskColor(col))
-				b.fillRect(40+60*j-offset, i*40,
-					10, 10)
+				b.fillRect(40+60*j-offset, i*40, 10, 10)
 			}
 		}
 		b.setColor(Background)
@@ -605,7 +602,7 @@ func init() {
 
 	patterns["GRADIENT"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 40; i++ {
-			col.A = uint8((40 - i) / 40.0 * 255)
+			col.A = uint8(float64(40-i) / 40.0 * 255)
 			b.setColor(col)
 			b.fillRect(0, i*10, 200, 10)
 		}
@@ -615,7 +612,7 @@ func init() {
 
 	patterns["GRADIENT_UP"] = func(b *Banner, col color.RGBA) {
 		for i := 0; i < 40; i++ {
-			col.A = uint8((40 - i) / 40.0 * 255)
+			col.A = uint8(float64(40-i) / 40.0 * 255)
 			b.setColor(col)
 			b.fillRect(0, 390-i*10, 200, 10)
 		}
