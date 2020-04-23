@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func main() {
@@ -53,7 +52,7 @@ func handleBannerGenerate(c echo.Context) error {
 		return c.NoContent(http.StatusInternalServerError)
 	}
 
-	stats, err := api.GetGuildStats(strings.ReplaceAll(guildName, " ", "%20"))
+	stats, err := api.GetGuildStats(guildName)
 	if err != nil {
 		log.Println(err)
 		return c.String(http.StatusBadRequest, "Non existent guild?")

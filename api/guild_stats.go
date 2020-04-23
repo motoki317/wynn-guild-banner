@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -45,7 +46,7 @@ type Request struct {
 }
 
 func GetGuildStats(guildName string) (*Guild, error) {
-	res, err := get(fmt.Sprintf(guildStatsURL, guildName))
+	res, err := get(fmt.Sprintf(guildStatsURL, url.PathEscape(guildName)))
 	if err != nil {
 		return nil, err
 	}
