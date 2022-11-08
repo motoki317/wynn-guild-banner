@@ -56,4 +56,4 @@ jobs:
         uses: Azure/container-scan@v0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: ghcr.io/${{ env.USERNAME }} /${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          image-name: ghcr.io/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
