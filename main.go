@@ -2,13 +2,15 @@ package main
 
 import (
 	"errors"
-	"github.com/labstack/echo"
-	"github.com/motoki317/wynn-guild-banner/api"
-	"github.com/motoki317/wynn-guild-banner/banner"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/labstack/echo/v4"
+
+	"github.com/motoki317/wynn-guild-banner/api"
+	"github.com/motoki317/wynn-guild-banner/banner"
 )
 
 func main() {
