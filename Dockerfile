@@ -1,4 +1,4 @@
-FROM golang:latest-alpine AS build
+FROM golang:alpine AS build
 
 ENV GOCACHE=/tmp/go/cache
 WORKDIR /go/src/github.com/motoki317/wynn-guild-banner
