@@ -2,7 +2,10 @@ module github.com/motoki317/wynn-guild-banner
 
 go 1.19
 
-require github.com/labstack/echo/v4 v4.9.1
+require (
+	github.com/labstack/echo/v4 v4.9.1
+	github.com/lthibault/jitterbug/v2 v2.2.2
+)
 
 require (
 	github.com/labstack/gommon v0.4.0 // indirect

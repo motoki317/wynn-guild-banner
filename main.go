@@ -5,17 +5,33 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"strconv"
+	"sync"
+	"time"
 
 	"github.com/labstack/echo/v4"
+	"github.com/lthibault/jitterbug/v2"
 
 	"github.com/motoki317/wynn-guild-banner/api"
 	"github.com/motoki317/wynn-guild-banner/banner"
 )
 
+var imageGenLock sync.Mutex
+
 func main() {
 	// mkdir images
 	_ = os.Mkdir("./images", os.ModePerm)
+
+	// start image purger
+	go func() {
+		t := jitterbug.New(24*time.Hour, jitterbug.Uniform{Min: 23 * time.Hour})
+		for range t.C {
+			if err := purgeImages(); err != nil {
+				log.Printf("an error occurred while purging images: %v\n", err)
+			}
+		}
+	}()
 
 	e := echo.New()
 
@@ -34,6 +50,14 @@ func main() {
 	}
 }
 
+func purgeImages() error {
+	imageGenLock.Lock()
+	defer imageGenLock.Unlock()
+
+	cmd := exec.Command("sh", "-c", "rm -r ./images/*.png")
+	return cmd.Run()
+}
+
 func handleRoot(c echo.Context) error {
 	return c.String(http.StatusOK, "Wynncraft Guild Banner Generator\n")
 }
@@ -43,6 +67,9 @@ func handleBannerGenerate(c echo.Context) error {
 	if guildName == "" {
 		return c.String(http.StatusBadRequest, "Specify a guild name")
 	}
+
+	imageGenLock.Lock()
+	defer imageGenLock.Unlock()
 
 	imagePath := "./images/" + guildName + ".png"
 	if _, err := os.Stat(imagePath); err == nil {
